@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Marc Santolaya · Full Stack Developer</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.x/dist/tabler-icons.min.css" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { syne: ['Syne','sans-serif'], inter: ['Inter','sans-serif'] },
+          colors: {
+            brand: { DEFAULT:'#6366f1', light:'#818cf8', dark:'#4338ca' },
+            surface: { 0:'#080c14', 1:'#0d1220', 2:'#111827', 3:'#1a2235', 4:'#1f2d42' },
+          },
+          animation: {
+            'fade-up': 'fadeUp .5s ease both',
+            'fade-in': 'fadeIn .4s ease both',
+            'pulse-slow': 'pulse 4s cubic-bezier(0.4,0,0.6,1) infinite',
+          },
+          keyframes: {
+            fadeUp:  { from:{ opacity:0, transform:'translateY(18px)' }, to:{ opacity:1, transform:'translateY(0)' } },
+            fadeIn:  { from:{ opacity:0 }, to:{ opacity:1 } },
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { font-family:'Inter',sans-serif; background:#080c14; color:#e2e8f0; }
+    h1,h2,h3,.font-display { font-family:'Syne',sans-serif; }
+    .glow { box-shadow: 0 0 60px rgba(99,102,241,.12); }
+    .glow-sm { box-shadow: 0 0 24px rgba(99,102,241,.15); }
+    .card-hover { transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease; }
+    .card-hover:hover { transform: translateY(-4px); border-color: rgba(99,102,241,.5); box-shadow: 0 12px 40px rgba(99,102,241,.12); }
+    .tag { display:inline-block; font-size:11px; font-weight:500; padding:3px 10px; border-radius:6px; background:rgba(99,102,241,.1); color:#a5b4fc; border:1px solid rgba(99,102,241,.2); }
+    .lang-dot { width:9px; height:9px; border-radius:50%; display:inline-block; flex-shrink:0; }
+    .gradient-text { background: linear-gradient(135deg, #818cf8 0%, #c084fc 50%, #f472b6 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+    .noise::before { content:''; position:absolute; inset:0; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E"); pointer-events:none; border-radius:inherit; }
+    .modal-scroll::-webkit-scrollbar { width:4px; } .modal-scroll::-webkit-scrollbar-track { background:transparent; } .modal-scroll::-webkit-scrollbar-thumb { background:#1f2d42; border-radius:2px; }
+    [data-aos] { opacity:0; transform:translateY(16px); transition: opacity .5s ease, transform .5s ease; }
+    [data-aos].visible { opacity:1; transform:translateY(0); }
+    .skill-bar { height:3px; border-radius:2px; background:linear-gradient(90deg,#6366f1,#a78bfa); }
+    .avatar-ring { background: conic-gradient(from 0deg, #6366f1, #c084fc, #f472b6, #6366f1); padding:2px; border-radius:50%; }
+  </style>
+</head>
+<body class="min-h-screen">
+
+<!-- BACKGROUND BLOBS -->
+<div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+  <div class="absolute -top-32 -left-32 w-96 h-96 rounded-full bg-brand/5 blur-3xl animation-pulse-slow"></div>
+  <div class="absolute top-1/2 -right-48 w-[500px] h-[500px] rounded-full bg-purple-900/10 blur-3xl"></div>
+  <div class="absolute bottom-0 left-1/3 w-72 h-72 rounded-full bg-indigo-900/10 blur-3xl"></div>
+</div>
+
+<div class="relative z-10 max-w-5xl mx-auto px-5 py-12 pb-24">
+
+  <!-- NAV -->
+  <nav class="flex justify-between items-center mb-16" data-aos>
+    <span class="font-display font-700 text-sm tracking-widest text-slate-400 uppercase">ms.dev</span>
+    <div class="flex gap-3">
+      <a href="https://github.com/marcSantolayaSanchez" target="_blank" rel="noopener"
+         class="flex items-center gap-2 px-4 py-2 rounded-xl bg-surface-3 border border-white/5 text-slate-400 hover:text-white hover:border-brand/40 transition-all text-sm font-medium">
+        <i class="ti ti-brand-github text-base"></i> GitHub
+      </a>
+      <a href="https://linkedin.com/in/marc-santolaya-sánchez-a80ab2297" target="_blank" rel="noopener"
+         class="flex items-center gap-2 px-4 py-2 rounded-xl bg-surface-3 border border-white/5 text-slate-400 hover:text-white hover:border-brand/40 transition-all text-sm font-medium">
+        <i class="ti ti-brand-linkedin text-base"></i> LinkedIn
+      </a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="mb-20" data-aos style="transition-delay:.05s">
+    <div class="flex items-start gap-6 mb-8">
+      <div class="avatar-ring flex-shrink-0">
+        <img src="https://avatars.githubusercontent.com/u/146827090?v=4" alt="Marc"
+             class="w-20 h-20 rounded-full object-cover block" />
+      </div>
+      <div class="pt-1">
+        <div class="flex items-center gap-2 mb-2">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 inline-block"></span>
+          <span class="text-xs text-emerald-400 font-medium tracking-wide">Disponible para trabajar</span>
+        </div>
+        <p class="text-slate-400 text-sm">Barcelona · Full Stack Developer</p>
+      </div>
+    </div>
+
+    <h1 class="font-display text-5xl md:text-6xl font-800 leading-tight mb-5">
+      Hola, soy <span class="gradient-text">Marc</span>.<br>
+      Construyo apps<br>que funcionan.
+    </h1>
+    <p class="text-slate-400 text-lg font-light leading-relaxed max-w-xl mb-8">
+      Desarrollador DAM con experiencia en web. Del backend Laravel a apps Android en Kotlin. Busco un equipo donde crecer y aportar desde el primer día.
+    </p>
+    <div class="flex gap-3 flex-wrap">
+      <a href="mailto:tu@email.com"
+         class="flex items-center gap-2 px-6 py-3 rounded-xl bg-brand text-white font-medium text-sm hover:bg-brand-dark transition-colors">
+        <i class="ti ti-mail"></i> Contactar
+      </a>
+      <a href="#proyectos"
+         class="flex items-center gap-2 px-6 py-3 rounded-xl bg-surface-3 border border-white/8 text-slate-300 font-medium text-sm hover:border-brand/40 hover:text-white transition-all">
+        Ver proyectos <i class="ti ti-arrow-down"></i>
+      </a>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <div class="grid grid-cols-3 gap-4 mb-20" data-aos style="transition-delay:.1s">
+    <div class="bg-surface-2 border border-white/5 rounded-2xl p-5 text-center glow-sm">
+      <div class="font-display text-3xl font-700 text-white" id="sn-repos">11</div>
+      <div class="text-xs text-slate-500 mt-1 uppercase tracking-wider">Repos</div>
+    </div>
+    <div class="bg-surface-2 border border-white/5 rounded-2xl p-5 text-center">
+      <div class="font-display text-3xl font-700 text-white" id="sn-stars">—</div>
+      <div class="text-xs text-slate-500 mt-1 uppercase tracking-wider">Stars</div>
+    </div>
+    <div class="bg-surface-2 border border-white/5 rounded-2xl p-5 text-center">
+      <div class="font-display text-3xl font-700 text-white" id="sn-langs">—</div>
+      <div class="text-xs text-slate-500 mt-1 uppercase tracking-wider">Lenguajes</div>
+    </div>
+  </div>
+
+  <!-- SKILLS -->
+  <section class="mb-20" data-aos style="transition-delay:.15s">
+    <p class="text-xs uppercase tracking-widest text-slate-500 font-medium mb-5">Stack tecnológico</p>
+    <div class="flex flex-wrap gap-2" id="skills-wrap">
+      <span class="tag">Laravel / PHP</span>
+      <span class="tag">MySQL</span>
+      <span class="tag">Blade</span>
+      <span class="tag">TailwindCSS</span>
+      <span class="tag">Kotlin</span>
+      <span class="tag">Android</span>
+      <span class="tag">JavaScript</span>
+      <span class="tag">Python</span>
+      <span class="tag">REST API</span>
+      <span class="tag">Git</span>
+      <span class="tag">PHPUnit</span>
+    </div>
+  </section>
+
+  <!-- FEATURED PROJECTS -->
+  <section id="proyectos" class="mb-20">
+    <p class="text-xs uppercase tracking-widest text-slate-500 font-medium mb-6" data-aos style="transition-delay:.2s">Proyectos destacados</p>
+    <div class="grid md:grid-cols-3 gap-5">
+
+      <!-- GymManager -->
+      <div class="group bg-surface-2 border border-white/5 rounded-2xl overflow-hidden card-hover cursor-pointer noise relative" onclick="openModal('gym')" data-aos style="transition-delay:.22s">
+        <div class="h-36 flex items-center justify-center relative overflow-hidden" style="background:linear-gradient(135deg,#052e16,#14532d)">
+          <div class="absolute inset-0 opacity-20" style="background:radial-gradient(circle at 70% 50%, #4ade80 0%, transparent 65%)"></div>
+          <i class="ti ti-barbell text-6xl text-emerald-400 opacity-90 group-hover:scale-110 transition-transform duration-300"></i>
+        </div>
+        <div class="p-5">
+          <div class="flex justify-between items-start mb-2">
+            <h3 class="font-display font-700 text-white text-base">GymManager</h3>
+            <span class="text-xs px-2 py-1 rounded-lg bg-emerald-950/60 text-emerald-400 border border-emerald-900/50 font-medium">Laravel 12</span>
+          </div>
+          <p class="text-slate-400 text-xs leading-relaxed mb-4">Sistema integral para gimnasios con roles, membresías, rutinas y API REST.</p>
+          <div class="flex flex-wrap gap-1 mb-4">
+            <span class="tag">PHP 8.3</span><span class="tag">MySQL</span><span class="tag">Sanctum</span>
+          </div>
+          <div class="flex items-center justify-between">
+            <span class="text-brand-light text-xs font-medium flex items-center gap-1 group-hover:gap-2 transition-all">Ver detalles <i class="ti ti-arrow-right text-xs"></i></span>
+            <span class="text-slate-600 text-xs flex items-center gap-1"><i class="ti ti-git-commit"></i>2 commits</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- crudApp -->
+      <div class="group bg-surface-2 border border-white/5 rounded-2xl overflow-hidden card-hover cursor-pointer noise relative" onclick="openModal('crud')" data-aos style="transition-delay:.27s">
+        <div class="h-36 flex items-center justify-center relative overflow-hidden" style="background:linear-gradient(135deg,#1e1b4b,#2e1065)">
+          <div class="absolute inset-0 opacity-20" style="background:radial-gradient(circle at 30% 50%, #a78bfa 0%, transparent 65%)"></div>
+          <i class="ti ti-database text-6xl text-violet-400 opacity-90 group-hover:scale-110 transition-transform duration-300"></i>
+        </div>
+        <div class="p-5">
+          <div class="flex justify-between items-start mb-2">
+            <h3 class="font-display font-700 text-white text-base">crudApp-Marc</h3>
+            <span class="text-xs px-2 py-1 rounded-lg bg-violet-950/60 text-violet-400 border border-violet-900/50 font-medium">Full Stack</span>
+          </div>
+          <p class="text-slate-400 text-xs leading-relaxed mb-4">CRUD moderno con Laravel + TailwindCSS. Escalable y preparado para React.</p>
+          <div class="flex flex-wrap gap-1 mb-4">
+            <span class="tag">Laravel 11</span><span class="tag">Tailwind</span><span class="tag">Vite</span>
+          </div>
+          <div class="flex items-center justify-between">
+            <span class="text-brand-light text-xs font-medium flex items-center gap-1 group-hover:gap-2 transition-all">Ver detalles <i class="ti ti-arrow-right text-xs"></i></span>
+            <span class="text-slate-600 text-xs flex items-center gap-1"><i class="ti ti-git-commit"></i>3 commits</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- MapApp -->
+      <div class="group bg-surface-2 border border-white/5 rounded-2xl overflow-hidden card-hover cursor-pointer noise relative" onclick="openModal('map')" data-aos style="transition-delay:.32s">
+        <div class="h-36 flex items-center justify-center relative overflow-hidden" style="background:linear-gradient(135deg,#1c1410,#431407)">
+          <div class="absolute inset-0 opacity-20" style="background:radial-gradient(circle at 60% 40%, #fb923c 0%, transparent 65%)"></div>
+          <i class="ti ti-map-2 text-6xl text-orange-400 opacity-90 group-hover:scale-110 transition-transform duration-300"></i>
+        </div>
+        <div class="p-5">
+          <div class="flex justify-between items-start mb-2">
+            <h3 class="font-display font-700 text-white text-base">MapApp</h3>
+            <span class="text-xs px-2 py-1 rounded-lg bg-orange-950/60 text-orange-400 border border-orange-900/50 font-medium">Android</span>
+          </div>
+          <p class="text-slate-400 text-xs leading-relaxed mb-4">App nativa Android en Kotlin con Google Maps. 23 commits de desarrollo activo.</p>
+          <div class="flex flex-wrap gap-1 mb-4">
+            <span class="tag">Kotlin</span><span class="tag">Maps API</span><span class="tag">Gradle KTS</span>
+          </div>
+          <div class="flex items-center justify-between">
+            <span class="text-brand-light text-xs font-medium flex items-center gap-1 group-hover:gap-2 transition-all">Ver detalles <i class="ti ti-arrow-right text-xs"></i></span>
+            <span class="text-slate-600 text-xs flex items-center gap-1"><i class="ti ti-git-commit"></i>23 commits</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- OTHER REPOS -->
+  <section class="mb-20">
+    <p class="text-xs uppercase tracking-widest text-slate-500 font-medium mb-6" data-aos>Otros repositorios</p>
+    <div class="grid sm:grid-cols-2 gap-3" id="grid">
+      <div class="col-span-2 py-10 text-center text-slate-500 text-sm">
+        <div class="w-6 h-6 border-2 border-slate-700 border-t-brand rounded-full animate-spin mx-auto mb-3"></div>
+        Cargando...
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="border-t border-white/5 pt-8 flex flex-col sm:flex-row justify-between items-center gap-3 text-slate-600 text-xs" data-aos>
+    <span>Marc Santolaya Sánchez · Barcelona · 2026</span>
+    <a href="https://github.com/marcSantolayaSanchez" target="_blank" class="hover:text-brand-light transition-colors">github.com/marcSantolayaSanchez</a>
+  </footer>
+
+</div>
+
+<!-- MODAL -->
+<div id="overlay" class="fixed inset-0 z-50 hidden items-center justify-center p-5" style="background:rgba(5,8,16,.85)">
+  <div id="modal" class="bg-surface-2 border border-white/8 rounded-2xl w-full max-w-lg max-h-[88vh] overflow-y-auto modal-scroll relative animate-fade-up">
+    <div id="modal-header" class="h-44 flex items-center justify-center relative overflow-hidden rounded-t-2xl">
+      <i id="modal-icon" class="text-6xl opacity-90"></i>
+      <button onclick="closeModal()" class="absolute top-3 right-3 w-8 h-8 rounded-xl bg-black/30 border border-white/10 flex items-center justify-center text-white/70 hover:text-white hover:bg-black/50 transition-all">
+        <i class="ti ti-x text-sm"></i>
+      </button>
+    </div>
+    <div class="p-6">
+      <h2 class="font-display text-2xl font-700 text-white mb-2" id="modal-title"></h2>
+      <p class="text-slate-400 text-sm leading-relaxed mb-5" id="modal-desc"></p>
+      <div class="flex flex-wrap gap-1.5 mb-6" id="modal-tags"></div>
+
+      <div class="mb-6">
+        <p class="text-xs uppercase tracking-widest text-slate-500 font-medium mb-3">Funcionalidades</p>
+        <ul id="modal-features" class="space-y-2"></ul>
+      </div>
+
+      <div class="mb-6">
+        <p class="text-xs uppercase tracking-widest text-slate-500 font-medium mb-3">Stack</p>
+        <div id="modal-stack" class="flex flex-wrap gap-2"></div>
+      </div>
+
+      <div class="flex gap-3 pt-5 border-t border-white/5">
+        <a id="modal-gh-link" href="#" target="_blank" rel="noopener"
+           class="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-brand text-white text-sm font-medium hover:bg-brand-dark transition-colors">
+          <i class="ti ti-brand-github"></i> Ver en GitHub
+        </a>
+        <button onclick="closeModal()"
+                class="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-surface-3 border border-white/8 text-slate-400 text-sm font-medium hover:text-white hover:border-white/20 transition-all">
+          Cerrar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── Repos a OCULTAR completamente ──────────────────────────────────────────
+const HIDDEN = [
+  'marcsantolayasanchez.github.io',   // repo del portfolio
+  'marcsantolayasanchez',             // README profile
+];
+// Repos que van en "destacados" → no se muestran en "otros"
+const FEATURED_IDS = ['gymmanager','crudapp-marc','mapapp'];
+
+// ── Data de modales ─────────────────────────────────────────────────────────
+const MODALS = {
+  gym: {
+    title:'GymManager', url:'https://github.com/marcSantolayaSanchez/gymmanager',
+    bg:'linear-gradient(135deg,#052e16,#14532d)', icon:'ti ti-barbell', iconColor:'#4ade80',
+    desc:'Sistema de gestión integral para gimnasios con Laravel 12, MySQL 8 y PHP 8.3. Panel centralizado con roles, membresías, rutinas y API REST completa con autenticación Sanctum.',
+    tags:['Laravel 12','PHP 8.3','MySQL 8','Blade','Sanctum','PHPUnit','Eloquent'],
+    features:[
+      'Gestión de clientes con membresías: Básica, Premium y VIP',
+      'Sistema de roles (Admin · Entrenador · Cliente) con Laravel Policies',
+      'Rutinas con estados: Pendiente, Completada, Cancelada',
+      'Dashboard con métricas en tiempo real e ingresos mensuales',
+      'API REST documentada con autenticación Bearer',
+      'Notificaciones automáticas por email para membresías próximas a vencer',
+      'Tests con PHPUnit cubriendo roles y validación de estados'
+    ],
+    stack:['Laravel 12','PHP 8.3','MySQL 8.0','Blade','Sanctum','PHPUnit','Artisan','Vite']
+  },
+  crud: {
+    title:'crudApp-Marc', url:'https://github.com/marcSantolayaSanchez/crudApp-Marc',
+    bg:'linear-gradient(135deg,#1e1b4b,#2e1065)', icon:'ti ti-database', iconColor:'#a78bfa',
+    desc:'Aplicación CRUD moderna con Laravel 11, MySQL y TailwindCSS. Gestión de usuarios con validaciones robustas e interfaz responsive. Arquitectura lista para integrar React como SPA.',
+    tags:['Laravel 11','TailwindCSS','MySQL','PHP','Blade','Vite'],
+    features:[
+      'CRUD completo de usuarios: crear, leer, actualizar y eliminar',
+      'Validaciones de formularios con mensajes de error descriptivos',
+      'Interfaz 100% responsive diseñada con TailwindCSS',
+      'Estructura modular para añadir nuevas entidades fácilmente',
+      'Build optimizado con Vite y PostCSS',
+      'Preparado para migrar el frontend a React'
+    ],
+    stack:['Laravel 11','PHP','MySQL','TailwindCSS','Blade','Vite','Composer','NPM']
+  },
+  map: {
+    title:'MapApp', url:'https://github.com/marcSantolayaSanchez/MapApp',
+    bg:'linear-gradient(135deg,#1c1410,#431407)', icon:'ti ti-map-2', iconColor:'#fb923c',
+    desc:'Aplicación nativa Android 100% en Kotlin con integración de Google Maps SDK. 23 commits de desarrollo activo, build system moderno con Gradle KTS y gestión segura de API keys.',
+    tags:['Kotlin','Android SDK','Google Maps','Gradle KTS'],
+    features:[
+      'Integración con Google Maps SDK para Android',
+      'Arquitectura nativa 100% Kotlin sin dependencias Java',
+      'Gestión segura de API keys mediante secrets.properties',
+      'Build system moderno con Gradle Kotlin DSL',
+      '23 commits con historial limpio y organizado',
+      'Compatible con Android Studio e IntelliJ IDEA'
+    ],
+    stack:['Kotlin','Android SDK','Google Maps API','Gradle KTS','Android Studio']
+  }
+};
+
+function openModal(key) {
+  const p = MODALS[key];
+  document.getElementById('modal-header').style.background = p.bg;
+  const ico = document.getElementById('modal-icon');
+  ico.className = p.icon + ' text-6xl opacity-90';
+  ico.style.color = p.iconColor;
+  document.getElementById('modal-title').textContent = p.title;
+  document.getElementById('modal-desc').textContent = p.desc;
+  document.getElementById('modal-tags').innerHTML = p.tags.map(t=>`<span class="tag">${t}</span>`).join('');
+  document.getElementById('modal-features').innerHTML = p.features.map(f=>`
+    <li class="flex items-start gap-2.5 text-sm text-slate-300">
+      <span class="w-1.5 h-1.5 rounded-full bg-brand mt-1.5 flex-shrink-0"></span>${f}
+    </li>`).join('');
+  document.getElementById('modal-stack').innerHTML = p.stack.map(s=>`
+    <span class="text-xs px-3 py-1.5 rounded-lg bg-surface-3 border border-white/8 text-slate-300 font-medium">${s}</span>`).join('');
+  document.getElementById('modal-gh-link').href = p.url;
+  const ol = document.getElementById('overlay');
+  ol.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+}
+function closeModal() {
+  document.getElementById('overlay').style.display = 'none';
+  document.body.style.overflow = '';
+}
+document.getElementById('overlay').addEventListener('click', e => { if(e.target===document.getElementById('overlay')) closeModal(); });
+document.addEventListener('keydown', e => { if(e.key==='Escape') closeModal(); });
+
+// ── GitHub API ───────────────────────────────────────────────────────────────
+const LANG_COLORS = {
+  JavaScript:'#f1e05a',TypeScript:'#3178c6',Java:'#b07219',Python:'#3572A5',
+  HTML:'#e34c26',CSS:'#563d7c','C#':'#239120',PHP:'#4F5D95',Kotlin:'#A97BFF',
+  Blade:'#f7523f',Dart:'#00B4AB',Vue:'#41b883',Go:'#00ADD8',Shell:'#89e051',Ruby:'#701516'
+};
+
+async function loadRepos() {
+  const grid = document.getElementById('grid');
+  try {
+    const res = await fetch('https://api.github.com/users/marcSantolayaSanchez/repos?sort=updated&per_page=50&type=public');
+    if (!res.ok) throw new Error(res.status);
+    const repos = await res.json();
+    const own = repos.filter(r => !r.fork);
+
+    // stats
+    document.getElementById('sn-repos').textContent = own.filter(r=>!HIDDEN.includes(r.name.toLowerCase())).length;
+    document.getElementById('sn-stars').textContent = own.reduce((s,r)=>s+r.stargazers_count,0);
+    const langs = [...new Set(own.map(r=>r.language).filter(Boolean))];
+    document.getElementById('sn-langs').textContent = langs.length;
+
+    // "otros" repos: excluir hidden + featured
+    const others = own.filter(r =>
+      !HIDDEN.includes(r.name.toLowerCase()) &&
+      !FEATURED_IDS.includes(r.name.toLowerCase())
+    );
+
+    if (!others.length) {
+      grid.innerHTML = '<p class="col-span-2 text-center text-slate-600 text-sm py-8">No hay más repositorios públicos.</p>';
+      return;
+    }
+
+    grid.innerHTML = others.map(r => {
+      const l = r.language||'';
+      const col = LANG_COLORS[l]||'#64748b';
+      const desc = r.description ? (r.description.length>80?r.description.slice(0,78)+'…':r.description) : 'Sin descripción.';
+      const upd = new Date(r.updated_at).toLocaleDateString('es-ES',{month:'short',year:'numeric'});
+      return `<a href="${r.html_url}" target="_blank" rel="noopener"
+        class="group flex flex-col gap-2 p-4 bg-surface-2 border border-white/5 rounded-xl hover:border-brand/30 hover:bg-surface-3 transition-all">
+        <div class="flex justify-between items-start">
+          <span class="font-medium text-slate-200 text-sm group-hover:text-white transition-colors">${r.name}</span>
+          <i class="ti ti-external-link text-slate-600 group-hover:text-brand-light text-sm transition-colors flex-shrink-0 mt-0.5"></i>
+        </div>
+        <p class="text-slate-500 text-xs leading-relaxed flex-1">${desc}</p>
+        <div class="flex justify-between items-center mt-1">
+          ${l ? `<span class="flex items-center gap-1.5 text-xs text-slate-500">
+            <span class="lang-dot" style="background:${col}"></span>${l}
+          </span>` : '<span></span>'}
+          <span class="flex gap-3 text-xs text-slate-600">
+            <span class="flex items-center gap-1"><i class="ti ti-star"></i>${r.stargazers_count}</span>
+            <span class="text-slate-700">${upd}</span>
+          </span>
+        </div>
+      </a>`;
+    }).join('');
+  } catch(e) {
+    grid.innerHTML = `<div class="col-span-2 text-center py-8 text-slate-500 text-sm">
+      No se pudieron cargar los repos.
+      <a href="https://github.com/marcSantolayaSanchez?tab=repositories" target="_blank" class="text-brand-light ml-1 hover:underline">Ver en GitHub →</a>
+    </div>`;
+  }
+}
+loadRepos();
+
+// ── AOS scroll ───────────────────────────────────────────────────────────────
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+}, { threshold: 0.1 });
+document.querySelectorAll('[data-aos]').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
